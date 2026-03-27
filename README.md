@@ -27,8 +27,9 @@ The SQLite databases (`chesscom.db`, `chess960.db`) containing the evaluated gam
 | `fig2_thinking_gap_chesscom.py` | Figure 2 | Format gap by thinking time and difficulty |
 | `chesscom_formal_models.py` | Table 1, EDT 1, 2, 4 | Format effect, interaction models, density distribution, within-decile gaps |
 | `chesscom_oster_experience.py` | EDT 2 (experience) | Experience non-attenuation, Oster bounds |
-| `extended_data_nonlinearity.py` | EDT 3 | Dose-response nonlinearity, per-piece displacement, offset share bootstrap |
-| `reviewer_analyses.py` | EDT 4 (robustness) | Move-level density interaction, time-allocation model |
+| `extended_data_nonlinearity.py` | EDT 3 | Dose-response nonlinearity, per-piece displacement, offset share bootstrap (Chess.com) |
+| `reviewer_analyses.py` | EDT 4 (robustness) | Move-level density interaction, time-allocation model (Chess.com) |
+| `template_distance.py` | Utility | Template distance computation for Chess960 starting positions |
 
 ## Requirements
 
@@ -62,7 +63,7 @@ python scripts/extended_data_nonlinearity.py
 python scripts/reviewer_analyses.py
 ```
 
-Scripts expect the database files at `../../chess960/db/chesscom.db` and `../../chess960/db/chess960.db` (relative to the script location). Adjust the `DB_PATH` variable at the top of each script if your database is elsewhere.
+Scripts expect the database file at `data/chesscom.db` (relative to the repository root). Place the database there or adjust the `DB_PATH` variable at the top of each script. All scripts are self-contained within this repository — no external dependencies beyond the listed Python packages.
 
 ## License
 

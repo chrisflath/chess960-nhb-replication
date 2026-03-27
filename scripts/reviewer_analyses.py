@@ -17,8 +17,8 @@ import warnings
 warnings.filterwarnings('ignore')
 np.random.seed(42)
 
-DB_PATH = Path('/Users/chris/_claude-cowork/chess960/db/chess960.db')
-OUTPUT_PATH = Path('/Users/chris/_claude-cowork/chess960Paper/nhb/reviewer_interaction_results.txt')
+DB_PATH = Path('data/chesscom.db')
+OUTPUT_PATH = Path('reviewer_interaction_results.txt')
 
 output_lines = []
 def log(msg=''):
@@ -38,7 +38,7 @@ def load_data():
     LEFT JOIN position_complexity pc ON g.id = pc.game_id
         AND m.move_number = pc.move_number AND m.player_color = pc.player_color
     JOIN players p ON g.player_username = p.username
-    WHERE g.time_control = 'rapid'
+    WHERE 1=1  -- Chess.com: all games are blitz
       AND m.centipawn_loss IS NOT NULL
       AND m.player_color = g.player_color
       AND m.move_number BETWEEN 1 AND 12

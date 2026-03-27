@@ -7,8 +7,8 @@ Analysis 2: Alternative distance metrics (equal weights, per-piece)
 Analysis 3: Offset share bootstrap (cluster bootstrap, 1000 reps)
 Analysis 4: Side-specific format effects (White vs Black)
 
-Inputs:  /Users/chris/_claude-cowork/chess960/db/chess960.db
-Outputs: /Users/chris/_claude-cowork/chess960Paper/nhb/extended_data_results.txt
+Inputs:  data/chesscom.db
+Outputs: extended_data_results.txt
 
 Dependencies: numpy, pandas, statsmodels, scipy
 """
@@ -29,11 +29,11 @@ set_seed = 42
 np.random.seed(set_seed)
 
 # ── Paths ──────────────────────────────────────────────────────────
-DB_PATH = Path("/Users/chris/_claude-cowork/chess960/db/chess960.db")
-OUTPUT_PATH = Path("/Users/chris/_claude-cowork/chess960Paper/nhb/extended_data_results.txt")
+DB_PATH = Path("data/chesscom.db")
+OUTPUT_PATH = Path("extended_data_results.txt")
 
-sys.path.insert(0, "/Users/chris/_claude-cowork/chess960")
-from analysis.template_distance import compute_sp_features
+# Template distance utility (included in repo)
+from template_distance import compute_sp_features
 
 DIVIDER = "=" * 80
 SUBDIV = "-" * 60
@@ -42,7 +42,7 @@ SUBDIV = "-" * 60
 # ── Data loading ───────────────────────────────────────────────────
 
 def load_data():
-    """Load game-level opening data (moves 1-12) for paired rapid players."""
+    """Load game-level opening data (moves 1-12) for paired titled players."""
     conn = sqlite3.connect(str(DB_PATH))
     conn.execute("PRAGMA busy_timeout = 30000")
 
@@ -63,7 +63,7 @@ def load_data():
     JOIN move_metrics m ON g.id = m.game_id
     JOIN players p ON g.player_username = p.username
     LEFT JOIN chess960_position_metrics pm ON g.chess960_position = pm.sp
-    WHERE g.time_control = 'rapid'
+    WHERE 1=1  -- Chess.com: all games are blitz
       AND m.centipawn_loss IS NOT NULL
       AND m.player_color = g.player_color
       AND m.move_number BETWEEN 1 AND 12
@@ -76,10 +76,10 @@ def load_data():
     df = pd.read_sql_query(query, conn)
     conn.close()
 
-    # 300-game cap per player per format
+    # No game cap for Chess.com titled players
     df = (df.sort_values("game_id")
             .groupby(["player", "format"], sort=False)
-            .head(300)
+            
             .reset_index(drop=True))
 
     # Paired players only

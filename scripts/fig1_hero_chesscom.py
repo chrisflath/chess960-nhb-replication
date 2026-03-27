@@ -22,14 +22,14 @@ import warnings
 warnings.filterwarnings('ignore')
 np.random.seed(42)
 
-PROJECT = Path('/Users/chris/_claude-cowork/chess960')
-PAPER = Path('/Users/chris/_claude-cowork/chess960Paper/nhb')
+PROJECT = Path('')
+PAPER = Path('Paper/nhb')
 OUTPUT_DIR = PAPER / 'figures'
 DB_CHESSCOM = PROJECT / 'db' / 'chesscom.db'
 OTB_JSON = PROJECT / 'data' / 'otb_analysis_sf18.json'
 
-sys.path.insert(0, str(PROJECT))
-from analysis.template_distance import compute_sp_features
+# Template distance utility (included in repo)
+from template_distance import compute_sp_features
 
 CHESSCOM_GMS = [
     'MagnusCarlsen', 'Hikaru', 'FabianoCaruana', 'alireza2003',

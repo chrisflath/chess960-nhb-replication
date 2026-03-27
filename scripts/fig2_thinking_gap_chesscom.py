@@ -17,8 +17,8 @@ import warnings
 warnings.filterwarnings('ignore')
 np.random.seed(42)
 
-DB_PATH = Path('/Users/chris/_claude-cowork/chess960/db/chesscom.db')
-OUT_DIR = Path('/Users/chris/_claude-cowork/chess960Paper/nhb/figures')
+DB_PATH = Path('data/chesscom.db')
+OUT_DIR = Path('figures')
 
 plt.rcParams.update({
     'font.family': 'sans-serif',
