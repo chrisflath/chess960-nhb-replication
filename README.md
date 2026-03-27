@@ -30,6 +30,7 @@ The SQLite databases (`chesscom.db`, `chess960.db`) containing the evaluated gam
 | `extended_data_nonlinearity.py` | EDT 3 | Dose-response nonlinearity, per-piece displacement, offset share bootstrap (Chess.com) |
 | `reviewer_analyses.py` | EDT 4 (robustness) | Move-level density interaction, time-allocation model (Chess.com) |
 | `predictive_transfer.py` | Table 1, EDT 5 | Cross-validated R² for rating → winning prediction across formats |
+| `robustness_checks.py` | Robustness | Player-FE LPM, logistic marginal effects, event-level balance |
 | `template_distance.py` | Utility | Template distance computation for Chess960 starting positions |
 
 ## Requirements
